@@ -3,7 +3,7 @@ import org.joone.engine.learning.*;
 import org.joone.io.*;
 import org.joone.net.*;
 
-/*
+/**
  *
  * JOONE实现
  *
