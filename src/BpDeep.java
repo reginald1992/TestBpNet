@@ -7,36 +7,36 @@ public class BpDeep{
     public double mobp;//动量系数
     public double rate;//学习系数
 
-    public BpDeep(int[] layernum, double rate, double mobp){
+    public BpDeep(int[] layerNum, double rate, double mobp){
         this.mobp = mobp;
         this.rate = rate;
-        layer = new double[layernum.length][];
-        layerErr = new double[layernum.length][];
-        layerWeight = new double[layernum.length][][];
-        layerWeightDelta = new double[layernum.length][][];
+        layer = new double[layerNum.length][];
+        layerErr = new double[layerNum.length][];
+        layerWeight = new double[layerNum.length][][];
+        layerWeightDelta = new double[layerNum.length][][];
         Random random = new Random();
-        for(int l=0;l<layernum.length;l++){
-            layer[l]=new double[layernum[l]];
-            layerErr[l]=new double[layernum[l]];
-            if(l+1<layernum.length){
-                layerWeight[l]=new double[layernum[l]+1][layernum[l+1]];
-                layerWeightDelta[l]=new double[layernum[l]+1][layernum[l+1]];
-                for(int j=0;j<layernum[l]+1;j++)
-                    for(int i=0;i<layernum[l+1];i++)
-                        layerWeight[l][j][i]=random.nextDouble();//随机初始化权重
+        for(int k=0;k<layerNum.length;k++){
+            layer[k]=new double[layerNum[k]];
+            layerErr[k]=new double[layerNum[k]];
+            if(k+1<layerNum.length){
+                layerWeight[k]=new double[layerNum[k]+1][layerNum[k+1]];
+                layerWeightDelta[k]=new double[layerNum[k]+1][layerNum[k+1]];
+                for(int j=0;j<layerNum[k]+1;j++)
+                    for(int i=0;i<layerNum[k+1];i++)
+                        layerWeight[k][j][i]=random.nextDouble();//随机初始化权重
             }
         }
     }
     //逐层向前计算输出
     public double[] computeOut(double[] in){
-        for(int l=1;l<layer.length;l++){
-            for(int j=0;j<layer[l].length;j++){
-                double z= layerWeight[l-1][layer[l-1].length][j];
-                for(int i=0;i<layer[l-1].length;i++){
-                    layer[l-1][i]=l==1?in[i]:layer[l-1][i];
-                    z+= layerWeight[l-1][i][j]*layer[l-1][i];
+        for(int k=1;k<layer.length;k++){
+            for(int j=0;j<layer[k].length;j++){
+                double z= layerWeight[k-1][layer[k-1].length][j];
+                for(int i=0;i<layer[k-1].length;i++){
+                    layer[k-1][i]=k==1?in[i]:layer[k-1][i];
+                    z+= layerWeight[k-1][i][j]*layer[k-1][i];
                 }
-                layer[l][j]=1/(1+Math.exp(-z));
+                layer[k][j]=1/(1+Math.exp(-z));
             }
         }
         return layer[layer.length-1];
