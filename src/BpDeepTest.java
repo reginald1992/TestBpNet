@@ -49,8 +49,8 @@ public class BpDeepTest{
                 }
             }
 
-        //迭代训练5000次
-        for(int n=0;n<5000;n++)
+        //迭代训练10000次
+        for(int n=0;n<10000;n++)
             for(int i=0;i<train.length;i++)
                 bp.train(train[i], target[i]);
 
