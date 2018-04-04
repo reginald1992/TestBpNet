@@ -38,11 +38,11 @@ public class BpDeepTest {
             double[][] train = new double[data.length / overlap][inputNodeNum];
             double[][] target = new double[data.length / overlap][outputNodeNum];
             for (int i = 0; i < data.length / overlap * overlap; i += overlap) {
-                for (int j = i; j < i + 20; j++) {
-                    train[i / 25][j % 20] = data[j];
+                for (int j = i; j < i + inputNodeNum; j++) {
+                    train[i / overlap][j % inputNodeNum] = data[j];
                 }
-                for (int j = i + 20; j < i + 25; j++) {
-                    target[i / 25][(j - 20) % 5] = data[j];
+                for (int j = i + inputNodeNum; j < i + overlap; j++) {
+                    target[i / overlap][(j - inputNodeNum) % outputNodeNum] = data[j];
                 }
             }
 
@@ -58,7 +58,7 @@ public class BpDeepTest {
 //            }
 
             //根据训练结果来预测一条新数据
-            Path path2 = Paths.get("./data/", "test2.csv");
+            Path path2 = Paths.get("./data/", "test4.csv");
             File file2 = path2.toFile();
             try
                     (
