@@ -11,7 +11,7 @@ public class BpDeepTest {
         // 比如{20,10,10,10,5}表示输入层是20个节点,输出层是5个节点，中间有3层隐含层，每层10个节点
         //第二个参数是学习步长，第三个参数是动量系数
         int inputNodeNum = 20;
-        int outputNodeNum = 5;
+        int outputNodeNum = 10;
         BpDeep bp = new BpDeep(new int[]{inputNodeNum, 10, outputNodeNum}, 0.15, 0.8);
 
         //数据读取并分割成训练集与预测集
@@ -52,10 +52,13 @@ public class BpDeepTest {
                     bp.train(train[i], target[i]);
 
             //根据训练结果来检验样本数据
-//            for (int j = 0; j < train.length; j++) {
-//                double[] result = bp.computeOut(train[j]);
-//                System.out.println(Arrays.toString(train[j]) + ":" + Arrays.toString(result));
-//            }
+            for (int j = 0; j < train.length; j++) {
+                double[] result = bp.computeOut(train[j]);
+                System.out.println(Arrays.toString(train[j]) + ":" + Arrays.toString(result));
+            }
+
+            // 计算训练样本目标和实际值之间的RMSE
+
 
             //根据训练结果来预测一条新数据
             Path path2 = Paths.get("./data/", "test4.csv");
