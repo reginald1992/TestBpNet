@@ -11,8 +11,8 @@ public class BpDeepTest {
         // 比如{20,10,10,10,5}表示输入层是20个节点,输出层是5个节点，中间有3层隐含层，每层10个节点
         //第二个参数是学习步长，第三个参数是动量系数
         int inputNodeNum = 20;
-        int outputNodeNum = 10;
-        BpDeep bp = new BpDeep(new int[]{inputNodeNum, 10, outputNodeNum}, 0.15, 0.8);
+        int outputNodeNum = 5;
+        BpDeep bp = new BpDeep(new int[]{inputNodeNum, 10, 10, outputNodeNum}, 0.15, 0.8);
 
         //数据读取并分割成训练集与预测集
         Path path = Paths.get("./data/", "cv.csv");
@@ -52,18 +52,13 @@ public class BpDeepTest {
                     bp.train(train[i], target[i]);
 
             //根据训练结果来检验样本数据
-            for (int j = 0; j < train.length; j++) {
-                double[] result = bp.computeOut(train[j]);
-                System.out.println(Arrays.toString(train[j]) + ":" + Arrays.toString(result));
-            }
-
-            // TODO 计算训练样本目标和实际值之间的RMSE
-            Rmse rmse = new Rmse();
-
-
+//            for (int j = 0; j < train.length; j++) {
+//                double[] resultTrain = bp.computeOut(train[j]);
+//                System.out.println(Arrays.toString(train[j]) + ":" + Arrays.toString(resultTrain));
+//            }
 
             //根据训练结果来预测一条新数据
-            Path path2 = Paths.get("./data/", "test4.csv");
+            Path path2 = Paths.get("./data/", "test6.csv");
             File file2 = path2.toFile();
             try
                     (
@@ -79,8 +74,35 @@ public class BpDeepTest {
                     data2[i] = a2.get(i);
                 }
 
-        double[] result = bp.computeOut(data2);
-        System.out.println(Arrays.toString(data2)+":"+Arrays.toString(result));
+                double[] resultTest = bp.computeOut(data2);
+                System.out.println("预测样本序列"+ Arrays.toString(data2) + "；预测序列：" + Arrays.toString(resultTest));
+
+                // TODO 计算训练样本目标和实际值之间的RMSE
+                Path path3 = Paths.get("./data/", "result6.csv");
+                File file3 = path3.toFile();
+                try
+                        (
+                                BufferedReader br3 = new BufferedReader(new InputStreamReader(new FileInputStream(file3)))
+                        ) {
+                    String line3 = null;
+                    ArrayList<Double> a3 = new ArrayList<Double>();
+                    while ((line3 = br3.readLine()) != null) {
+                        a3.add(Double.parseDouble(line3));
+                    }
+                    double[] data3 = new double[a3.size()];
+                    for (int i = 0; i < data3.length; ++i) {
+                        data3[i] = a3.get(i);
+                    }
+                    System.out.println("真实序列"+ Arrays.toString(data3));
+                    Rmse rmse = new Rmse();
+                    System.out.println("预测序列与真实序列维数是否一致？"+ rmse.compareArrLength(data3, resultTest));
+                    System.out.println("预测值与真实值的RMSE="+ rmse.calcuRmse(data3, resultTest));
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
