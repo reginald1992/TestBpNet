@@ -1,8 +1,8 @@
 public class TestRmse{
     public static void main(String[] args) {
-        Rmse r = new Rmse();
         double[] arr1 = new double[]{1.2, 2.3, 3.6, 2.6, 6.9};
         double[] arr2 = new double[]{2.3, 3.8, 2.8, 6.9, 5.8};
+        Rmse r = new Rmse(arr1, arr2);
         r.calcuRmse(arr1, arr2);
         System.out.println(r.calcuRmse(arr1, arr2));
     }
@@ -11,7 +11,10 @@ class Rmse {
     public double[] arr1;
     public double[] arr2;
 //    构造器
-    public Rmse(){}
+
+
+    public Rmse() {
+    }
 
     public Rmse(double[] arr1, double[] arr2){
         this.arr1 = arr1;

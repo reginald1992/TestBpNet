@@ -12,7 +12,7 @@ public class BpDeepTest {
         //第二个参数是学习步长，第三个参数是动量系数
         int inputNodeNum = 20;
         int outputNodeNum = 5;
-        BpDeep bp = new BpDeep(new int[]{inputNodeNum, 10, 10, outputNodeNum}, 0.15, 0.8);
+        BpDeep bp = new BpDeep(new int[]{inputNodeNum, 10, 10, 10, outputNodeNum}, 0.15, 0.8);
 
         //数据读取并分割成训练集与预测集
         Path path = Paths.get("./data/", "cv.csv");
@@ -58,7 +58,7 @@ public class BpDeepTest {
 //            }
 
             //根据训练结果来预测一条新数据
-            Path path2 = Paths.get("./data/", "test2.csv");
+            Path path2 = Paths.get("./data/", "test6.csv");
             File file2 = path2.toFile();
             try
                     (
@@ -79,7 +79,7 @@ public class BpDeepTest {
                 System.out.println("预测序列："+ Arrays.toString(resultTest));
 
                 // TODO 计算训练样本目标和实际值之间的RMSE
-                Path path3 = Paths.get("./data/", "result2.csv");
+                Path path3 = Paths.get("./data/", "result6.csv");
                 File file3 = path3.toFile();
                 try
                         (
@@ -97,7 +97,7 @@ public class BpDeepTest {
                     System.out.println("真实序列"+ Arrays.toString(data3));
                     Rmse rmse = new Rmse();
                     System.out.println("预测序列与真实序列维数是否一致？"+ rmse.compareArrLength(data3, resultTest));
-                    System.out.println("预测值与真实值的RMSE="+ rmse.calcuRmse(data3, resultTest));
+                    System.out.println("预测值与真实值的RMSE = "+ rmse.calcuRmse(data3, resultTest));
 
                 } catch (IOException e) {
                     e.printStackTrace();
