@@ -57,7 +57,9 @@ public class BpDeepTest {
                 System.out.println(Arrays.toString(train[j]) + ":" + Arrays.toString(result));
             }
 
-            // 计算训练样本目标和实际值之间的RMSE
+            // TODO 计算训练样本目标和实际值之间的RMSE
+            Rmse rmse = new Rmse();
+
 
 
             //根据训练结果来预测一条新数据
