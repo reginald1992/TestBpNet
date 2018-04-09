@@ -58,7 +58,7 @@ public class BpDeepTest {
 //            }
 
             //根据训练结果来预测一条新数据
-            Path path2 = Paths.get("./data/", "test6.csv");
+            Path path2 = Paths.get("./data/", "test8.csv");
             File file2 = path2.toFile();
             try
                     (
@@ -78,8 +78,8 @@ public class BpDeepTest {
                 System.out.println("样本序列："+ Arrays.toString(data2));
                 System.out.println("预测序列："+ Arrays.toString(resultTest));
 
-                // TODO 计算训练样本目标和实际值之间的RMSE
-                Path path3 = Paths.get("./data/", "result6.csv");
+                // 计算训练样本目标和实际值之间的RMSE
+                Path path3 = Paths.get("./data/", "result8.csv");
                 File file3 = path3.toFile();
                 try
                         (
