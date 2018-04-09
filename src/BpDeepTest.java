@@ -12,7 +12,7 @@ public class BpDeepTest {
         //第二个参数是学习步长，第三个参数是动量系数
         int inputNodeNum = 20;
         int outputNodeNum = 5;
-        BpDeep bp = new BpDeep(new int[]{inputNodeNum, 10, 10, 10, outputNodeNum}, 0.15, 0.8);
+        BpDeep bp = new BpDeep(new int[]{inputNodeNum, 10, 10, outputNodeNum}, 0.1, 0.8);
 
         //数据读取并分割成训练集与预测集
         Path path = Paths.get("./data/", "cv.csv");
@@ -47,7 +47,7 @@ public class BpDeepTest {
             }
 
             //迭代训练10000次
-            for (int n = 0; n < 10000; n++)
+            for (int n = 0; n < 30000; n++)
                 for (int i = 0; i < train.length; i++)
                     bp.train(train[i], target[i]);
 
